@@ -22,7 +22,7 @@ breaks <- as.vector(unique(aggreg$year))
 
 #plot3
 png(filename = "plot3.png", width = 480, height = 480, units = "px")
-g <- ggplot(aggreg, aes(x = year, y = amount))
+g <- ggplot(aggreg, aes(x = year, y = amount, fill = factor(type)))
 g <- g + geom_bar(stat="identity") 
 g <- g + facet_wrap(~ type)
 g <- g + scale_x_continuous(breaks=breaks)
