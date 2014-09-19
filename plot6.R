@@ -19,7 +19,8 @@ bc_la_NEI <- NEI[NEI$fips %in% cities$fips & NEI$type == "ON-ROAD",]
 bc_la_NEI <- merge(bc_la_NEI, cities, by = "fips")
 
 #aggregate with ddply by year and City
-aggreg <- ddply(bc_la_NEI, c("year","City"), summarise, amount=sum(Emissions))
+#use a logarithmic scale to show the great difference between baltimore and LA
+aggreg <- ddply(bc_la_NEI, c("year","City"), summarise, amount=log(sum(Emissions)))
 breaks <- as.vector(unique(aggreg$year))
 
 #plot6
@@ -28,6 +29,6 @@ g <- ggplot(aggreg, aes(x = year, y = amount, fill = factor(year))) + theme(lege
 g <- g + geom_bar(stat="identity")
 g <- g + facet_wrap(~ City)
 g <- g + scale_x_continuous(breaks=breaks)
-g <- g + ggtitle('Emissions from motor vehicle sources\nBaltimore City / Los Angeles County') + ylab("PM2.5 Emission (Tons)") + xlab("Year")
+g <- g + ggtitle('Emissions from motor vehicle sources\nBaltimore City / Los Angeles County') + ylab("PM2.5 Emission (Log(Tons))") + xlab("Year")
 g
 dev.off()
