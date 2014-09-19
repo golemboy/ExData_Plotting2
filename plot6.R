@@ -28,6 +28,6 @@ g <- ggplot(aggreg, aes(x = year, y = amount, fill = factor(year))) + theme(lege
 g <- g + geom_bar(stat="identity")
 g <- g + facet_wrap(~ City)
 g <- g + scale_x_continuous(breaks=breaks)
-g <- g + ggtitle('PM2.5 Emission per Type in Baltimore City') + ylab("PM2.5 Emission (Tons)") + xlab("Year")
+g <- g + ggtitle('Emissions from motor vehicle sources\nBaltimore City / Los Angeles County') + ylab("PM2.5 Emission (Tons)") + xlab("Year")
 g
 dev.off()
